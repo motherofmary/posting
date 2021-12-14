@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block content %}
+<html lang="en">
+<head>
+<title>Page Title</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+/* Style the body */
+body {
+  font-family: Arial;
+  margin: 0;
+}
+
+/* Header/Logo Title */
+.header {
+  padding: 90px;
+  text-align: center;
+  background: #1abc9c;
+  color: white;
+  font-size: 30px;
+}
+
+/* Page Content */
+.content {padding:20px;}
+</style>
+</head>
+<body>
+<form action="task_view" method="post">
+     {% csrf_token %}
+
+<div class="header">
+  <h1>BUILD YOUR DREAM</h1>
+</div>
+
+<div class="content">
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="banner">
+                 <div class="banner text">
+                 <h4>POST HERE</h4>
+
+  <form method="post" class="p-3 shadow" >
+    {%csrf_token %}
+    <div class="form-group">
+    <input type="text" name="title" class="form-control"  placeholder="title">
+    </div>
+    <div class="form-group">
+    <input type="text" name="desc" class="form-control" placeholder="desc">
+    </div>
+      <div class="form-group">
+    <input type="date" name="date" class="form-control" placeholder="date of post">
+    </div>
+    <input type="submit" class="btn btn-success">
+  </form>
+                 </div>
+
+            </div>
+        </div>
+        <div class="col-md-6">
+        <h3>Your's post</h3>
+            {% for i in obj1 %}
+            <div class="shadow card">
+        <div class="card-body">
+        <h5 class="card-title">{{i.title}}</h5>
+        <p><b>{{i.desc}}</b></p>
+            <p><b>{{i.date}}</b></p>
+
+        <a class="btn btn-danger" href="{% url 'delete' i.id %}">DELETE</a>
+            <a class="btn btn-success" href="{% url 'update' i.id %}">UPDATE</a>
+
+
+        </div>
+                </div>
+            <br>
+            {% endfor %}
+        </div>
+
+
+
+    </div>
+
+
+</div>
+
+
+
+
+.....<br>
+
+</div>
+</form>
+</body>
+</html>
+
+
+{% endblock %}
